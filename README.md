@@ -14,7 +14,7 @@ A blazing-fast, fully transparent Neovim configuration optimized for web develop
 - Clean, distraction-free coding environment
 
 ### ⚡ **Performance Optimized**
-- **Built-in profiling system** - Toggle with F1 key for performance analysis
+- **Built-in profiling system** - Toggle with F1 key for performance analysis (WIP)
 - Lazy loading for all plugins with optimized startup time
 - Auto-save functionality with smart debouncing
 
