@@ -96,9 +96,7 @@ Leader key: `<Space>`
 - `<C-p>` - Toggle Telescope preview (while in Telescope)
 - Auto-save on buffer leave and text changes
 
-## 🚀 Try It Out (Without Installing)
-
-Want to test this configuration without affecting your current setup? Here's how:
+## Try It Out
 
 ### 1. **Backup & Clean Slate**
 ```bash
