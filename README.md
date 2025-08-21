@@ -1,4 +1,4 @@
-# 🚀 Modern Neovim Configuration
+# my own nvim configuration
 
 A blazing-fast, fully transparent Neovim configuration optimized for web development with comprehensive LSP support and modern plugin ecosystem.
 
@@ -6,42 +6,42 @@ A blazing-fast, fully transparent Neovim configuration optimized for web develop
 ![Lua](https://img.shields.io/badge/Language-Lua-blue.svg)
 ![License](https://img.shields.io/badge/License-MIT-yellow.svg)
 
-##  Features
+##  features
 
-### 🎨 **Full Transparency UI**
+###  **transparent ui**
 - Complete transparent interface with preserved cursor, selection, and search highlights
 - Custom transparent statusline with essential information only
 - Clean, distraction-free coding environment
 
-### ⚡ **Performance Optimized**
+###  **performance optimization**
 - **Built-in profiling system** - Toggle with F1 key for performance analysis (WIP)
 - Lazy loading for all plugins with optimized startup time
 - Auto-save functionality with smart debouncing
 
-### 🌐 **Web Development Powerhouse**
+###  **built-in dev tools**
 - **20+ Language Servers** automatically installed via Mason
 - **Tailwind CSS** integration with automatic class sorting across 30+ filetypes
 - Template language support (Django, Jinja, HTML) with specialized highlighting
 - Auto-tag closing for HTML/JSX components
 
-### 🔍 **Dual Fuzzy Finding**
+###  **dual fuzzy finding**
 - **Telescope** with FZF native for advanced searching (grep, files, LSP functions)
 - **FZF-lua** for lightning-fast file operations
 - Live preview for grep results with syntax highlighting
 
-### 📝 **Modern Completion**
+###  **auto completion**
 - **Blink.cmp** - Next-generation completion engine
 - VSCode-style snippets with custom templates
 - Smart auto-completion with LSP integration
 
-### 🎯 **Smart Navigation**
+###  **smart navigation**
 - **Harpoon 2** for instant file switching (5 quick slots)
 - **Neo-tree** file explorer with Nerd Font icons and git integration
 - **Flash.nvim** for precise cursor movement
 
-## 🛠️ Language Support
+## Language Support
 
-### Fully Configured LSPs:
+### fully configured LSPs:
 - **Web:** TypeScript/JavaScript (ts_ls, biome, eslint), HTML, CSS, Tailwind CSS, JSON
 - **Backend:** Python (basedpyright, ruff, pyright), Go (gopls), Rust (rust_analyzer)
 - **Systems:** C/C++ (clangd), Zig (zls), Lua (lua_ls), Bash
@@ -53,7 +53,7 @@ A blazing-fast, fully transparent Neovim configuration optimized for web develop
 - **Black** for Python, **stylua** for Lua
 - **Smart imports** and code organization
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 ~/.config/nvim/
@@ -72,18 +72,18 @@ A blazing-fast, fully transparent Neovim configuration optimized for web develop
 └── CLAUDE.md              # AI assistant guidance
 ```
 
-## ⌨️ Key Bindings
+##  Key Bindings
 
 Leader key: `<Space>`
 
-### 🔍 **Search & Navigation**
+###  **Search & Navigation**
 - `<leader>sf` - Find files (Telescope)
 - `<leader>sg` - Live grep with preview
 - `<leader>sr` - Recent files
 - `<leader>fe` - Toggle file explorer (Neo-tree)
 - `ma` - Add to Harpoon, `M` - Harpoon menu
 
-### 💻 **LSP & Development**
+###  **LSP & Development**
 - `K` - Hover documentation
 - `gd` - Go to definition
 - `<leader>lr` - Find references
@@ -91,7 +91,7 @@ Leader key: `<Space>`
 - `<leader>mp` - Format current buffer
 - `<leader>mt` - Sort Tailwind classes
 
-### 🎨 **UI & Utilities**
+###  **UI & Utilities**
 - `F1` - Toggle performance profiler
 - `<C-p>` - Toggle Telescope preview (while in Telescope)
 - Auto-save on buffer leave and text changes
@@ -144,7 +144,7 @@ mv ~/.config/nvim.backup ~/.config/nvim
 mv ~/.local/share/nvim.backup ~/.local/share/nvim
 ```
 
-## 📋 Requirements
+##  Requirements
 
 - **Neovim 0.10+** (required for modern plugin compatibility)
 - **Nerd Font** - For icons (MesloLGLDZ Nerd Font recommended)
@@ -158,7 +158,7 @@ mv ~/.local/share/nvim.backup ~/.local/share/nvim
 - Language servers, formatters, and linters install automatically
 - No manual LSP installation required
 
-## 🎨 Customization
+##  Customization
 
 ### **Transparency**
 The full transparency is configured in:
@@ -195,11 +195,11 @@ Customize colors in `lua/plugins/colorschemes.lua` and highlight utilities
 - Check terminal-specific transparency settings
 - Some terminals may not support full transparency
 
-## 📜 License
+## License
 
 MIT License - feel free to fork, modify, and share!
 
-## 🙏 Acknowledgments
+##  Acknowledgments
 
 Built with these amazing projects:
 - [Lazy.nvim](https://github.com/folke/lazy.nvim) - Plugin manager
