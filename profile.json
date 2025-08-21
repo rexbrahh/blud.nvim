@@ -1,0 +1,2 @@
+[{"ts":44.083,"tid":1,"ph":"i","pid":79954,"name":"User","args":{"match":"ProfileStart"},"cat":"","s":"g"},
+{"ts":51979.25,"tid":1,"ph":"i","pid":79954,"name":"CursorHold","args":{"match":""},"cat":"","s":"g"}]
