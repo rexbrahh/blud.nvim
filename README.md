@@ -6,6 +6,9 @@ A blazing-fast, fully transparent Neovim configuration optimized for web develop
 ![Lua](https://img.shields.io/badge/Language-Lua-blue.svg)
 ![License](https://img.shields.io/badge/License-MIT-yellow.svg)
 
+<img width="3456" height="2234" alt="CleanShot 2025-08-21 at 18 08 03@2x" src="https://github.com/user-attachments/assets/87959379-5681-402e-b843-04c658283497" />
+<img width="3456" height="2234" alt="CleanShot 2025-08-21 at 18 09 26@2x" src="https://github.com/user-attachments/assets/8be712b6-2931-4002-abcc-b17b23485e56" />
+
 ##  features
 
 ###  **transparent ui**
