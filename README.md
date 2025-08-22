@@ -1,7 +1,5 @@
 # my own nvim configuration
 
-A blazing-fast, fully transparent Neovim configuration optimized for web development with comprehensive LSP support and modern plugin ecosystem.
-
 ![Neovim Version](https://img.shields.io/badge/Neovim-0.10+-brightgreen.svg)
 ![Lua](https://img.shields.io/badge/Language-Lua-blue.svg)
 ![License](https://img.shields.io/badge/License-MIT-yellow.svg)
