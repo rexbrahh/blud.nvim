@@ -171,42 +171,4 @@ Modify mappings in `lua/config/keymaps.lua` and individual plugin configs
 ### **Theme & Colors**
 Customize colors in `lua/plugins/colorschemes.lua` and highlight utilities
 
-## 🔧 Troubleshooting
 
-### **Icons Not Displaying**
-- Install a Nerd Font and set it in your terminal
-- Restart terminal after font installation
-
-### **LSP Not Working**
-- Run `:Mason` to check LSP installation status
-- Run `:LspInfo` to see active language servers
-- Try `:MasonInstall <server-name>` for manual installation
-
-### **Performance Issues**
-- Use `F1` to toggle the built-in profiler
-- Check `:Lazy profile` for plugin load times
-- Disable unused plugins in their respective config files
-
-### **Transparency Issues**
-- Ensure terminal supports transparency
-- Check terminal-specific transparency settings
-- Some terminals may not support full transparency
-
-## License
-
-MIT License - feel free to fork, modify, and share!
-
-##  Acknowledgments
-
-Built with these amazing projects:
-- [Lazy.nvim](https://github.com/folke/lazy.nvim) - Plugin manager
-- [Telescope](https://github.com/nvim-telescope/telescope.nvim) - Fuzzy finder
-- [Blink.cmp](https://github.com/saghen/blink.cmp) - Completion engine
-- [Neo-tree](https://github.com/nvim-neo-tree/neo-tree.nvim) - File explorer
-- [Mason](https://github.com/williamboman/mason.nvim) - LSP installer
-
----
-
-**Happy Coding! 🎉**
-
-*This configuration is constantly evolving. Star ⭐ the repo to stay updated with the latest features!*
