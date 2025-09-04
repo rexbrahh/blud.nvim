@@ -1,0 +1,26 @@
+
+services:
+  nvim:
+    build: .
+    container_name: bludvim
+    stdin_open: true
+    tty: true
+    environment:
+      - TERM=xterm-256color
+      - COLORTERM=truecolor
+    volumes:
+      # Mount current directory to /workspace
+      - .:/workspace
+      # Optional: Persist nvim data between runs
+      - nvim_data:/home/nvim/.local/share/nvim
+      - nvim_cache:/home/nvim/.cache/nvim
+      # Optional: Mount SSH keys for git operations
+      - ~/.ssh:/home/nvim/.ssh:ro
+      # Optional: Mount git config
+      - ~/.gitconfig:/home/nvim/.gitconfig:ro
+    working_dir: /workspace
+    command: nvim
+
+volumes:
+  nvim_data:
+  nvim_cache:
