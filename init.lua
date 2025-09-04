@@ -33,7 +33,7 @@ local function toggle_profile()
     vim.notify("Profile plugin not installed. Install stevearc/profile.nvim to enable profiling.", vim.log.levels.WARN)
     return
   end
-  
+
   if prof.is_recording() then
     prof.stop()
     vim.ui.input(
@@ -49,4 +49,6 @@ local function toggle_profile()
     prof.start("blink*")
   end
 end
+vim.opt.mouse = "a"
+
 vim.keymap.set("", "<f1>", toggle_profile)
