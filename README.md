@@ -1,6 +1,46 @@
 # my own nvim configuration
 
 <img width="3456" height="2234" alt="CleanShot 2025-09-04 at 18 49 44@2x" src="https://github.com/user-attachments/assets/faab91ee-89de-4bfb-9123-17754daf63a1" />
+## installation:
+
+## Try It Out
+
+### 1. **Backup & Clean Slate**
+```bash
+mv ~/.config/nvim ~/.config/nvim.backup
+mv ~/.local/share/nvim ~/.local/share/nvim.backup
+```
+
+### 2. **Clone & Test**
+```bash
+git clone https://github.com/yourusername/nvim-config ~/.config/nvim
+
+# Start Neovim - plugins will auto-install
+nvim
+```
+
+### Optionally this one-liner:
+```bash
+curl -fsSL https://raw.githubusercontent.com/rexbrahh/.nvim/main/install.sh | bash
+```
+
+### Or with docker
+```bash
+# Test command - just prints version
+docker run --rm \
+  -v "$(pwd)":/workspace \
+  bludvim:latest nvim --version
+```
+```bash
+# interactive mode
+docker run -it --rm \
+  -v "$(pwd)":/workspace \
+  -v "$HOME/.ssh":/home/nvim/.ssh:ro \
+  -v "$HOME/.gitconfig":/home/nvim/.gitconfig:ro \
+  -e TERM=xterm-256color \
+  -e COLORTERM=truecolor \
+  bludvim:latest
+```
 
 
 ##  features
@@ -50,25 +90,6 @@
 - **Black** for Python, **stylua** for Lua
 - **Smart imports** and code organization
 
-## Project Structure
-
-```
-~/.config/nvim/
-├── init.lua                 # Entry point with Neovide support
-├── lua/
-│   ├── config/             # Core configuration
-│   │   ├── settings.lua    # Neovim options
-│   │   ├── keymaps.lua     # Global key mappings
-│   │   └── lazy.lua        # Plugin manager setup
-│   ├── plugins/            # Individual plugin configs (40+ plugins)
-│   └── utils/              # Custom utilities
-│       ├── highlights.lua  # Color manipulation functions
-│       └── tailwind.lua    # Tailwind CSS helpers
-├── after/ftplugin/         # Filetype-specific configs
-├── snippets/               # Custom VSCode-style snippets
-└── CLAUDE.md              # AI assistant guidance
-```
-
 ##  Key Bindings
 
 Leader key: `<Space>`
@@ -93,23 +114,7 @@ Leader key: `<Space>`
 - `<C-p>` - Toggle Telescope preview (while in Telescope)
 - Auto-save on buffer leave and text changes
 
-## Try It Out
 
-### 1. **Backup & Clean Slate**
-```bash
-# Backup your current config
-mv ~/.config/nvim ~/.config/nvim.backup
-mv ~/.local/share/nvim ~/.local/share/nvim.backup
-```
-
-### 2. **Clone & Test**
-```bash
-# Clone this configuration
-git clone https://github.com/yourusername/nvim-config ~/.config/nvim
-
-# Start Neovim - plugins will auto-install
-nvim
-```
 
 ### 3. **First Launch**
 - Lazy.nvim will automatically install all plugins
