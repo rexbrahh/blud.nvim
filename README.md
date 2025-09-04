@@ -2,8 +2,6 @@
 
 <img width="3456" height="2234" alt="CleanShot 2025-09-04 at 18 49 44@2x" src="https://github.com/user-attachments/assets/faab91ee-89de-4bfb-9123-17754daf63a1" />
 
-<img width="3456" height="2234" alt="CleanShot 2025-09-04 at 18 50 01@2x" src="https://github.com/user-attachments/assets/c6d69713-7352-4f03-8dc9-cdf1685643e8" />
-
 
 ##  features
 
