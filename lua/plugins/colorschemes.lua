@@ -1,24 +1,21 @@
 return {
-  "folke/tokyonight.nvim",
-  lazy = false,
-  enabled = false,
-  priority = 1000,
-  config = function()
-    require("tokyonight").setup({
-      transparent = false,
-      -- on_colors = function(colors)
-      --   colors.bg = "#0D1017"
-      --   colors.bg_dark = "#0D1017"
-      --   colors.bg_float = "#131621"
-      --   colors.bg_popup = "#131621"
-      --   colors.bg_search = "#131621"
-      --   colors.bg_sidebar = "#131621"
-      --   colors.bg_statusline = "#131621"
-      -- end,
-      styles = {
-        functions = { italic = true },
-      },
-    })
-    vim.cmd.colorscheme("tokyonight")
-  end,
+  -- Default: Atom One Dark (via onedarkpro)
+  {
+    "olimorris/onedarkpro.nvim",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require("onedarkpro").setup({
+        options = { cursorline = true },
+      })
+      vim.cmd.colorscheme("onedark")
+    end,
+  },
+
+  -- Additional themes (loaded at startup to allow live preview switching)
+  { "folke/tokyonight.nvim", lazy = false, priority = 999 },
+  { "catppuccin/nvim", name = "catppuccin", lazy = false, priority = 999 },
+  { "rose-pine/neovim", name = "rose-pine", lazy = false, priority = 999 },
+  { "ellisonleao/gruvbox.nvim", lazy = false, priority = 999 },
+  { "rebelot/kanagawa.nvim", lazy = false, priority = 999 },
 }
