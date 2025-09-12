@@ -2,8 +2,6 @@
 
 <img width="6016" height="3384" alt="CleanShot 2025-09-12 at 19 23 23@2x" src="https://github.com/user-attachments/assets/f8b148bb-09f2-45b6-aa6b-61958d1ca142" />
 
-<img width="6016" height="3384" alt="CleanShot 2025-09-12 at 19 24 27@2x" src="https://github.com/user-attachments/assets/720d4ad3-7056-46ad-b8a6-6046a02be178" />
-
 <img width="6016" height="3384" alt="CleanShot 2025-09-12 at 19 24 07@2x" src="https://github.com/user-attachments/assets/749535d8-281d-4794-bdc4-09e36cb9d933" />
 
 <img width="6016" height="3384" alt="Ghostty 2025-09-12 19 27 16" src="https://github.com/user-attachments/assets/ecb415f2-fcd3-4a3e-8bba-be716081bf6f" />
@@ -49,6 +47,10 @@ docker run -it --rm \
   -e TERM=xterm-256color \
   -e COLORTERM=truecolor \
   bludvim:latest
+```
+### Or try it with my docker image
+```bash
+  docker pull ghcr.io/rexbrahh/blud.nvim:sha256-082e52133450504a35828c5c8dd40e62963bd8c03b399381b2032890cd2278f2.sig
 ```
 
 
