@@ -44,6 +44,13 @@ return {
         lua = { "stylua" },
         nix = { "nixfmt" },
         sql = { "sleek" },
+        go = { "gofumpt", "goimports" },
+        rust = { "rustfmt" },
+        toml = { "taplo" },
+        terraform = { "terraform_fmt" },
+        c = { "clang_format" },
+        cpp = { "clang_format" },
+        zig = { "zigfmt" },
       },
       format_on_save = {
         lsp_fallback = true,

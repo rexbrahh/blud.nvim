@@ -180,6 +180,17 @@ return {
           },
         },
       },
+
+      -- Extra LSPs (safe, common languages)
+      svelte = {},
+      astro = {},
+      graphql = {},
+      prismals = {},
+      taplo = {}, -- TOML
+      lemminx = {}, -- XML
+      terraformls = {},
+      ansiblels = {},
+      cmake = {},
     }
 
     for server, config in pairs(servers) do
