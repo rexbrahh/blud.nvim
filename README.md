@@ -22,7 +22,7 @@ mv ~/.local/share/nvim ~/.local/share/nvim.backup
 
 ### 2. **Clone & Test**
 ```bash
-git clone https://github.com/yourusername/nvim-config ~/.config/nvim
+git clone https://github.com/rexbrahh/blud.nvim.git ~/.config/nvim
 
 # Start Neovim - plugins will auto-install
 nvim
@@ -30,7 +30,7 @@ nvim
 
 ### Optionally this one-liner:
 ```bash
-curl -fsSL https://raw.githubusercontent.com/rexbrahh/.nvim/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/rexbrahh/blud.nvim/main/install.sh | bash
 ```
 
 ### Or with docker
