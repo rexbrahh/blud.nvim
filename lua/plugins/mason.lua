@@ -37,6 +37,7 @@ return {
         "basedpyright", -- Already configured
         "ruff", -- Already configured
         "bashls", -- Already configured
+        "zls", -- Zig
         
         -- Additional Popular LSPs
         "rust_analyzer", -- Rust
@@ -46,6 +47,17 @@ return {
         "marksman", -- Markdown
         "dockerls", -- Docker
         "docker_compose_language_service", -- Docker Compose
+
+        -- Extra popular LSPs (safe additions)
+        "svelte", -- Svelte
+        "astro", -- Astro
+        "graphql", -- GraphQL
+        "prismals", -- Prisma
+        "taplo", -- TOML
+        "lemminx", -- XML
+        "terraformls", -- Terraform
+        "ansiblels", -- Ansible
+        "cmake", -- CMake
       },
       automatic_installation = true,
     })
