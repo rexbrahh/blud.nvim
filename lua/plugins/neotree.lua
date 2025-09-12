@@ -10,8 +10,8 @@ return {
     keymap.set(
       "n",
       "<leader>fe",
-      "<cmd>Neotree toggle focus right reveal_force_cwd<cr>",
-      { desc = "File Explorer" }
+      "<cmd>Neotree toggle focus left reveal_force_cwd<cr>",
+      { desc = "File Explorer (left)" }
     )
 
     vim.g.loaded_netrw = 1
@@ -20,6 +20,9 @@ return {
     require("neo-tree").setup({
       retain_hidden_root_indent = false,
       hide_root_node = true,
+      window = {
+        position = "left",
+      },
 
       default_component_configs = {
         icon = {

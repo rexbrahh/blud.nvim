@@ -1,0 +1,38 @@
+# Git
+.git
+.gitignore
+
+# Node modules
+node_modules
+npm-debug.log
+
+# Docker files
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# IDE
+.vscode
+.idea
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.swp
+*.swo
+
+# Documentation images
+*.png
+*.jpg
+*.jpeg
+*.gif
+
+# README images and assets
+assets/
+screenshots/

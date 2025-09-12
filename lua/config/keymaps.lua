@@ -92,3 +92,6 @@ map("v", "<leader>ms", function()
   wrap_with_markdown(content)
   vim.notify("Selection copied with MD formatting")
 end, "Yank selection with filename as heading and wrap in markdown")
+
+-- Theme picker with live preview
+map("n", "<leader>tt", ":Telescope colorscheme enable_preview=true<CR>", "Switch theme (preview)")

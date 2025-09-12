@@ -30,10 +30,13 @@ return {
       [[  ████████  █████ ░░████████░░████████ ]],
       [[ ░░░░░░░░  ░░░░░   ░░░░░░░░  ░░░░░░░░  ]]
     }
+    -- Set header highlight to a pleasant blue
+    dashboard.section.header.opts.hl = "AlphaHeader"
     dashboard.section.buttons.val = {
       dashboard.button("e", "  New file", ":ene <BAR> startinsert <CR>"),
       dashboard.button("f", "  Find file", ":Telescope find_files<CR>"),
       dashboard.button("r", "  Recent", ":Telescope oldfiles<CR>"),
+      dashboard.button("t", "  Themes", ":Telescope colorscheme enable_preview=true<CR>"),
       dashboard.button("c", "  Config", ":e ~/.config/nvim/init.lua<CR>"),
       dashboard.button("q", "  Quit", ":qa<CR>"),
     }
