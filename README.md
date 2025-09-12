@@ -6,6 +6,10 @@
 
 <img width="6016" height="3384" alt="CleanShot 2025-09-12 at 19 24 07@2x" src="https://github.com/user-attachments/assets/749535d8-281d-4794-bdc4-09e36cb9d933" />
 
+<img width="6016" height="3384" alt="Ghostty 2025-09-12 19 27 16" src="https://github.com/user-attachments/assets/ecb415f2-fcd3-4a3e-8bba-be716081bf6f" />
+
+<img width="6016" height="3384" alt="Ghostty 2025-09-12 19 28 01" src="https://github.com/user-attachments/assets/b64fead4-3e11-4f7c-be3f-e5a8dfcb6f30" />
+
 ## installation:
 
 ## Try It Out
