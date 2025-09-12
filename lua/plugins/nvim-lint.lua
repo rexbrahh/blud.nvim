@@ -1,7 +1,7 @@
 return {
   "mfussenegger/nvim-lint",
   lazy = true,
-  enabled = false,
+  enabled = true,
   event = { "BufReadPre", "BufNewFile" },
   config = function()
     local lint = require("lint")
@@ -9,6 +9,9 @@ return {
     lint.linters_by_ft = {
       sh = { "shellcheck" },
       zsh = { "shellcheck" },
+      yaml = { "yamllint" },
+      dockerfile = { "hadolint" },
+      markdown = { "markdownlint" },
     }
 
     local function filename_or_stdin()
@@ -20,6 +23,13 @@ return {
       return "-"
     end
     lint.linters.shellcheck.args = { "-x", "--format", "json1", filename_or_stdin }
+    -- Quiet defaults if tools are missing; nvim-lint will no-op
+    if lint.linters.yamllint then
+      lint.linters.yamllint.args = { "-f", "parsable", filename_or_stdin }
+    end
+    if lint.linters.markdownlint then
+      lint.linters.markdownlint.args = { "--stdin" }
+    end
 
     local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
 

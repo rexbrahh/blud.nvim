@@ -106,7 +106,13 @@ return {
 
       biome = {},
       eslint = {},
-      jsonls = {},
+      jsonls = (function()
+        local cfg = { settings = { json = { validate = { enable = true } } } }
+        if vim.g.use_schemastore ~= false then
+          cfg.settings.json.schemas = require('schemastore').json.schemas()
+        end
+        return cfg
+      end)(),
       cssls = {
         settings = {
           css = {
@@ -145,7 +151,6 @@ return {
       },
 
       -- Additional Popular LSPs
-      ts_ls = {}, -- TypeScript/JavaScript
       rust_analyzer = {
         settings = {
           ["rust-analyzer"] = {
@@ -161,25 +166,17 @@ return {
       clangd = {
         cmd = { "clangd", "--background-index", "--clang-tidy" },
       },
-      yamlls = {
-        settings = {
-          yaml = {
-            keyOrdering = false,
-          },
-        },
-      },
+      yamlls = (function()
+        local yaml = { keyOrdering = false, schemaStore = { enable = false, url = "" } }
+        if vim.g.use_schemastore ~= false then
+          yaml.schemas = require('schemastore').yaml.schemas()
+        end
+        return { settings = { yaml = yaml } }
+      end)(),
       marksman = {}, -- Markdown
       dockerls = {}, -- Docker
       docker_compose_language_service = {}, -- Docker Compose
-      pyright = {
-        settings = {
-          python = {
-            analysis = {
-              typeCheckingMode = "basic",
-            },
-          },
-        },
-      },
+      -- pyright intentionally omitted to avoid duplicate with basedpyright
 
       -- Extra LSPs (safe, common languages)
       svelte = {},
@@ -193,7 +190,18 @@ return {
       cmake = {},
     }
 
+    -- Use Conform for formatting; disable LSP formatters
+    local function disable_formatting(client, _)
+      client.server_capabilities.documentFormattingProvider = false
+      client.server_capabilities.documentRangeFormattingProvider = false
+    end
+
     for server, config in pairs(servers) do
+      local old_attach = config.on_attach
+      config.on_attach = function(client, bufnr)
+        disable_formatting(client, bufnr)
+        if old_attach then old_attach(client, bufnr) end
+      end
       require("lspconfig")[server].setup(config)
     end
   end,
