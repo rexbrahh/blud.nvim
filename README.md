@@ -10,8 +10,6 @@
 
 ## installation:
 
-## Try It Out
-
 ### 1. **Backup & Clean Slate**
 ```bash
 mv ~/.config/nvim ~/.config/nvim.backup
