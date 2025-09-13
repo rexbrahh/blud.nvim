@@ -53,100 +53,7 @@ docker run -it --rm \
   docker pull ghcr.io/rexbrahh/blud.nvim:sha256-082e52133450504a35828c5c8dd40e62963bd8c03b399381b2032890cd2278f2.sig
 ```
 
-
-##  features
-
-###  **transparent ui**
-- Complete transparent interface with preserved cursor, selection, and search highlights
-- Custom transparent statusline with essential information only
-- Clean, distraction-free coding environment
-
-###  **performance optimization**
-- **Built-in profiling system** - Toggle with F1 key for performance analysis (WIP)
-- Lazy loading for all plugins with optimized startup time
-- Auto-save functionality with smart debouncing
-
-###  **built-in dev tools**
-- **20+ Language Servers** automatically installed via Mason
-- **Tailwind CSS** integration with automatic class sorting across 30+ filetypes
-- Template language support (Django, Jinja, HTML) with specialized highlighting
-- Auto-tag closing for HTML/JSX components
-
-###  **dual fuzzy finding**
-- **Telescope** with FZF native for advanced searching (grep, files, LSP functions)
-- **FZF-lua** for lightning-fast file operations
-- Live preview for grep results with syntax highlighting
-
-###  **auto completion**
-- **Blink.cmp** - Next-generation completion engine
-- VSCode-style snippets with custom templates
-- Smart auto-completion with LSP integration
-
-###  **smart navigation**
-- **Harpoon 2** for instant file switching (5 quick slots)
-- **Neo-tree** file explorer with Nerd Font icons and git integration
-- **Flash.nvim** for precise cursor movement
-
-## Language Support
-
-### fully configured LSPs:
-- **Web:** TypeScript/JavaScript (ts_ls, biome, eslint), HTML, CSS, Tailwind CSS, JSON
-- **Backend:** Python (basedpyright, ruff, pyright), Go (gopls), Rust (rust_analyzer)
-- **Systems:** C/C++ (clangd), Zig (zls), Lua (lua_ls), Bash
-- **Config:** YAML, Markdown, Docker, Nix
-
-### Smart Formatting:
-- **Auto-formatting** on save with language-specific formatters
-- **Biome** for JavaScript/TypeScript with rustywind for Tailwind
-- **Black** for Python, **stylua** for Lua
-- **Smart imports** and code organization
-
-##  Key Bindings
-
-Leader key: `<Space>`
-
-###  **Search & Navigation**
-- `<leader>sf` - Find files (Telescope)
-- `<leader>sg` - Live grep with preview
-- `<leader>sr` - Recent files
-- `<leader>fe` - Toggle file explorer (Neo-tree)
-- `ma` - Add to Harpoon, `M` - Harpoon menu
-
-###  **LSP & Development**
-- `K` - Hover documentation
-- `gd` - Go to definition
-- `<leader>lr` - Find references
-- `<leader>rn` - Smart rename
-- `<leader>mp` - Format current buffer
-- `<leader>mt` - Sort Tailwind classes
-
-###  **UI & Utilities**
-- `F1` - Toggle performance profiler
-- `<C-p>` - Toggle Telescope preview (while in Telescope)
-- Auto-save on buffer leave and text changes
-
-
-
-### 3. **First Launch**
-- Lazy.nvim will automatically install all plugins
-- LSP servers install automatically via Mason
-- Wait for installations to complete (~2-3 minutes)
-- Restart Neovim to ensure everything loads properly
-
-### 4. **Try These Features**
-```bash
-# Open a project and test fuzzy finding
-cd your-project
-nvim .
-
-# Try these commands inside Neovim:
-:Telescope find_files
-:Mason                    # View installed LSPs
-:Lazy                     # Check plugin status
-:Alpha                    # Return to dashboard
-```
-
-### 5. **Restore Original Config**
+### **Restore Original Config**
 ```bash
 # Remove test config
 rm -rf ~/.config/nvim
@@ -166,11 +73,7 @@ mv ~/.local/share/nvim.backup ~/.local/share/nvim
 - **Python 3** - For Python LSPs
 - **Rust** - For rust-analyzer (optional)
 - **Go** - For gopls (optional)
-
-### System Dependencies (Auto-installed via Mason)
-- Language servers, formatters, and linters install automatically
-- No manual LSP installation required
-
+  
 ##  Customization
 
 ### **Transparency**
