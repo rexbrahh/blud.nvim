@@ -23,7 +23,7 @@ return {
     require("mason-lspconfig").setup({
       ensure_installed = {
         -- Web Development
-        "ts_ls", -- TypeScript/JavaScript
+        -- typescript handled by typescript-tools; avoid ts_ls duplication
         "biome", -- Already configured
         "eslint", -- Already configured
         "html", -- Already configured

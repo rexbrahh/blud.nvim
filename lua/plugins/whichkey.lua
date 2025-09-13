@@ -14,6 +14,7 @@ return {
       { "<leader>q", group = "Sessions" },
       { "<leader>r", group = "Rename" },
       { "<leader>s", group = "Search" },
+      { "<leader>x", group = "Tests" },
       { "<leader>st", mode = "n", desc = "Todos (Telescope)" },
       { "<leader>t", group = "Tabs" },
       { "<leader>u", group = "Buffers" },

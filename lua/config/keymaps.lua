@@ -93,5 +93,10 @@ map("v", "<leader>ms", function()
   vim.notify("Selection copied with MD formatting")
 end, "Yank selection with filename as heading and wrap in markdown")
 
+-- Toggle JSON/YAML SchemaStore
+map("n", "<leader>lS", function()
+  require("config.schema").toggle()
+end, "Toggle SchemaStore for JSON/YAML")
+
 -- Theme picker with live preview
 map("n", "<leader>tt", ":Telescope colorscheme enable_preview=true<CR>", "Switch theme (preview)")
