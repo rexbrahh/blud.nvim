@@ -1,12 +1,12 @@
 # my own nvim configuration
 
-<img width="6016" height="3384" alt="CleanShot 2025-09-12 at 19 23 23@2x" src="https://github.com/user-attachments/assets/f8b148bb-09f2-45b6-aa6b-61958d1ca142" />
+<img width="3456" height="2234" alt="Ghostty 2025-09-13 19 45 58" src="https://github.com/user-attachments/assets/e3331096-da06-479b-b1d7-ab297bb4e842" />
 
-<img width="6016" height="3384" alt="CleanShot 2025-09-12 at 19 24 07@2x" src="https://github.com/user-attachments/assets/749535d8-281d-4794-bdc4-09e36cb9d933" />
+<img width="3456" height="2234" alt="Ghostty 2025-09-13 19 46 10" src="https://github.com/user-attachments/assets/4d79a921-bfad-4b98-b54c-9324dbc4bbe7" />
 
-<img width="6016" height="3384" alt="Ghostty 2025-09-12 19 27 16" src="https://github.com/user-attachments/assets/ecb415f2-fcd3-4a3e-8bba-be716081bf6f" />
+<img width="3456" height="2234" alt="Ghostty 2025-09-13 19 46 26" src="https://github.com/user-attachments/assets/8decaba1-a6ce-440d-8815-5c0725619c02" />
 
-<img width="6016" height="3384" alt="Ghostty 2025-09-12 19 28 01" src="https://github.com/user-attachments/assets/b64fead4-3e11-4f7c-be3f-e5a8dfcb6f30" />
+<img width="3456" height="2234" alt="Ghostty 2025-09-13 19 46 37" src="https://github.com/user-attachments/assets/a39d22c4-0ad8-415b-922b-e450341b8706" />
 
 ## installation:
 
