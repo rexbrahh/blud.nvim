@@ -1,4 +1,5 @@
-# my own nvim configuration
+# my own nvim configuration [![CI](https://github.com/rexbrahh/blud.nvim/actions/workflows/docker-image.yml/badge.svg)](https://github.com/rexbrahh/blud.nvim/actions/workflows/docker-image.yml) [![CI](https://github.com/rexbrahh/blud.nvim/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/rexbrahh/blud.nvim/actions/workflows/docker-publish.yml)
+
 
 <img width="3456" height="2234" alt="Ghostty 2025-09-13 19 45 58" src="https://github.com/user-attachments/assets/e3331096-da06-479b-b1d7-ab297bb4e842" />
 
