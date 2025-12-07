@@ -26,12 +26,10 @@ return {
 
       default_component_configs = {
         icon = {
-          folder_closed = "",
-          folder_open = "",
+          folder_closed = "",
+          folder_open = "",
           folder_empty = "󰜌",
-          -- folder_closed = "",
-          -- folder_open = "",
-          -- folder_empty = "",
+          default = "󰈔",
         },
         indent = {
           indent_size = 2,
@@ -86,21 +84,20 @@ return {
 
       filesystem = {
         filtered_items = {
+          visible = true, -- show everything, do not hide entries
           show_hidden_count = false,
           group_empty_dirs = true,
           hide_dotfiles = false,
+          hide_gitignored = false,
           always_show = {
             ".env.local",
             ".envrc",
             ".env",
           },
-          never_show = {
-            "__pycache__",
-            ".DS_Store",
-            ".git",
-          },
+          never_show = {},
         },
         bind_to_cwd = true, -- true creates a 2-way binding between vim's cwd and neo-tree's root
+        use_libuv_file_watcher = true,
         window = {
           mappings = {
             ["<C-v>"] = "open_vsplit",
