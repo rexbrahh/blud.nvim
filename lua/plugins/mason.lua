@@ -1,7 +1,6 @@
 return {
   "williamboman/mason.nvim",
-  event = { "BufReadPre", "BufNewFile" },
-  cmd = "Mason",
+  cmd = { "Mason", "MasonInstall", "MasonUninstall", "MasonLog", "LspInstall", "LspUninstall" },
   dependencies = {
     "williamboman/mason-lspconfig.nvim",
   },
@@ -30,7 +29,7 @@ return {
         "cssls", -- Already configured
         "tailwindcss", -- Already configured
         "jsonls", -- Already configured
-        
+
         -- Popular Languages
         "lua_ls", -- Already configured
         "gopls", -- Already configured
@@ -38,11 +37,10 @@ return {
         "ruff", -- Already configured
         "bashls", -- Already configured
         "zls", -- Zig
-        
+
         -- Additional Popular LSPs
         "rust_analyzer", -- Rust
         "clangd", -- C/C++
-        "pyright", -- Alternative Python LSP
         "yamlls", -- YAML
         "marksman", -- Markdown
         "dockerls", -- Docker
@@ -59,7 +57,7 @@ return {
         "ansiblels", -- Ansible
         "cmake", -- CMake
       },
-      automatic_installation = true,
+      automatic_enable = false,
     })
   end,
 }

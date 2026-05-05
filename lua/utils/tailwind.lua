@@ -108,8 +108,8 @@ tailwind.lsp = {
     "svelte",
     "templ",
   },
-  root_dir = function(fname)
-    local root_file = {
+  root_dir = function(fname_or_bufnr, on_dir)
+    local markers = {
       "static/input.css", -- this way tailwind will work with a custom css setup
       "tailwind.config.js",
       "tailwind.config.cjs",
@@ -126,9 +126,57 @@ tailwind.lsp = {
       "theme/static_src/tailwind.config.ts",
       "theme/static_src/postcss.config.js",
     }
-    local util = require("lspconfig.util")
-    root_file = util.insert_package_json(root_file, "tailwindcss", fname)
-    return util.root_pattern(unpack(root_file))(fname)
+
+    local function join(...)
+      return table.concat({ ... }, "/")
+    end
+
+    local function has_tailwind_package_json(dir)
+      local package_json = join(dir, "package.json")
+      if vim.uv.fs_stat(package_json) == nil then
+        return false
+      end
+
+      local ok, lines = pcall(vim.fn.readfile, package_json)
+      return ok and table.concat(lines, "\n"):find('"tailwindcss"', 1, true) ~= nil
+    end
+
+    local function find_root(fname)
+      local dir = vim.fs.dirname(fname)
+      while dir do
+        for _, marker in ipairs(markers) do
+          if vim.uv.fs_stat(join(dir, marker)) then
+            return dir
+          end
+        end
+        if has_tailwind_package_json(dir) then
+          return dir
+        end
+
+        local parent = vim.fs.dirname(dir)
+        if parent == dir then
+          break
+        end
+        dir = parent
+      end
+    end
+
+    local fname = fname_or_bufnr
+    if type(fname_or_bufnr) == "number" then
+      fname = vim.api.nvim_buf_get_name(fname_or_bufnr)
+      if fname == "" then
+        fname = vim.uv.cwd()
+      end
+    end
+
+    local root = find_root(fname)
+    if type(on_dir) == "function" then
+      if root then
+        on_dir(root)
+      end
+      return
+    end
+    return root
   end,
 }
 

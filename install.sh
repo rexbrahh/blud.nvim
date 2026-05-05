@@ -1,11 +1,11 @@
 #!/bin/bash
 
 # BludVim - Dockerized Neovim Configuration Installer
-# Usage: curl -fsSL https://raw.githubusercontent.com/rexbrahh/.nvim/main/install.sh | bash
+# Usage: curl -fsSL https://raw.githubusercontent.com/rexbrahh/blud.nvim/main/install.sh | bash
 
 set -e
 
-REPO_URL="https://github.com/rexbrahh/.nvim"
+REPO_URL="https://github.com/rexbrahh/blud.nvim"
 INSTALL_DIR="$HOME/.bludvim"
 BINARY_NAME="bludvim"
 BINARY_PATH="/usr/local/bin/$BINARY_NAME"

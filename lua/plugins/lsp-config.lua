@@ -2,8 +2,6 @@ return {
   "neovim/nvim-lspconfig",
   event = { "BufReadPre", "BufNewFile" },
   dependencies = {
-    "saghen/blink.cmp",
-    { "antosha417/nvim-lsp-file-operations", config = true },
     { "j-hui/fidget.nvim", opts = {} },
   },
 
@@ -31,7 +29,7 @@ return {
         end, "Go to previous diagnostic")
 
         map("]d", function()
-          vim.diagnostic.jump({ float = { border = "single" }, count = -1 })
+          vim.diagnostic.jump({ float = { border = "single" }, count = 1 })
         end, "Go to next diagnostic")
       end,
     })
@@ -73,6 +71,11 @@ return {
       },
     })
 
+    local mason_bin = vim.fn.stdpath("data") .. "/mason/bin"
+    if not vim.env.PATH:find(mason_bin, 1, true) then
+      vim.env.PATH = mason_bin .. ":" .. vim.env.PATH
+    end
+
     local servers = {
       zls = {
         settings = {
@@ -109,7 +112,7 @@ return {
       jsonls = (function()
         local cfg = { settings = { json = { validate = { enable = true } } } }
         if vim.g.use_schemastore ~= false then
-          cfg.settings.json.schemas = require('schemastore').json.schemas()
+          cfg.settings.json.schemas = require("schemastore").json.schemas()
         end
         return cfg
       end)(),
@@ -169,7 +172,7 @@ return {
       yamlls = (function()
         local yaml = { keyOrdering = false, schemaStore = { enable = false, url = "" } }
         if vim.g.use_schemastore ~= false then
-          yaml.schemas = require('schemastore').yaml.schemas()
+          yaml.schemas = require("schemastore").yaml.schemas()
         end
         return { settings = { yaml = yaml } }
       end)(),
@@ -196,13 +199,28 @@ return {
       client.server_capabilities.documentRangeFormattingProvider = false
     end
 
+    local function has_executable(server)
+      local config = vim.lsp.config[server]
+      local cmd = config and config.cmd
+      return type(cmd) ~= "table" or type(cmd[1]) ~= "string" or vim.fn.executable(cmd[1]) == 1
+    end
+
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    capabilities.textDocument.completion.completionItem.snippetSupport = true
+    capabilities.textDocument.completion.completionItem.resolveSupport = {
+      properties = { "documentation", "detail", "additionalTextEdits", "command", "data" },
+    }
     for server, config in pairs(servers) do
       local old_attach = config.on_attach
       config.on_attach = function(client, bufnr)
         disable_formatting(client, bufnr)
         if old_attach then old_attach(client, bufnr) end
       end
-      require("lspconfig")[server].setup(config)
+      config.capabilities = vim.tbl_deep_extend("force", {}, capabilities, config.capabilities or {})
+      vim.lsp.config(server, config)
+      if has_executable(server) then
+        vim.lsp.enable(server)
+      end
     end
   end,
 }

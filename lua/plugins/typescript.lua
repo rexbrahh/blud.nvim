@@ -1,20 +1,25 @@
 vim.api.nvim_create_autocmd("LspAttach", {
-  pattern = { "*.ts", "*.tsx", "*.js", "*.jsx" },
-  callback = function()
+  group = vim.api.nvim_create_augroup("typescript_tools_keymaps", { clear = true }),
+  callback = function(event)
+    local ts_filetypes = {
+      javascript = true,
+      javascriptreact = true,
+      typescript = true,
+      typescriptreact = true,
+    }
+    if not ts_filetypes[vim.bo[event.buf].filetype] then
+      return
+    end
+
     vim.keymap.set("n", "<leader>li", function()
       vim.notify("Organizing imports...")
       vim.cmd("TSToolsOrganizeImports")
-    end, { desc = "Organize imports" })
-  end,
-})
+    end, { buffer = event.buf, desc = "Organize imports" })
 
-vim.api.nvim_create_autocmd("LspAttach", {
-  pattern = { "*.ts", "*.tsx", "*.js", "*.jsx" },
-  callback = function()
     vim.keymap.set("n", "<leader>la", function()
       vim.notify("Adding missing imports...")
       vim.cmd("TSToolsAddMissingImports")
-    end, { desc = "Add missing imports" })
+    end, { buffer = event.buf, desc = "Add missing imports" })
   end,
 })
 

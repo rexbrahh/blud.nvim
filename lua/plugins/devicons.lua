@@ -1,6 +1,7 @@
 return {
   "nvim-tree/nvim-web-devicons",
   enabled = true, -- Fallback icon pack
+  lazy = true,
   config = function()
     require("nvim-web-devicons").setup({
       -- Enable strict mode to show all available icons

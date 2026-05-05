@@ -49,7 +49,7 @@ docker run -it --rm \
 ```
 ### Or try it with my docker image
 ```bash
-  docker pull ghcr.io/rexbrahh/blud.nvim:sha256-082e52133450504a35828c5c8dd40e62963bd8c03b399381b2032890cd2278f2.sig
+  docker pull ghcr.io/rexbrahh/blud.nvim:latest
 ```
 
 ### **Restore Original Config**
@@ -65,7 +65,7 @@ mv ~/.local/share/nvim.backup ~/.local/share/nvim
 
 ##  Requirements
 
-- **Neovim 0.10+** (required for modern plugin compatibility)
+- **Neovim 0.11+** (required for native `vim.lsp.config` support)
 - **Nerd Font** - For icons (MesloLGLDZ Nerd Font recommended)
 - **Git** - For plugin management
 - **Node.js** - For LSP servers
@@ -88,5 +88,3 @@ Modify mappings in `lua/config/keymaps.lua` and individual plugin configs
 
 ### **Theme & Colors**
 Customize colors in `lua/plugins/colorschemes.lua` and highlight utilities
-
-

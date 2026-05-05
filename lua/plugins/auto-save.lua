@@ -1,6 +1,22 @@
 return {
   "pocco81/auto-save.nvim",
+  event = { "BufReadPost", "BufNewFile" },
   config = function()
+    local ignored_filetypes = {
+      alpha = true,
+      gitcommit = true,
+      gitrebase = true,
+      harpoon = true,
+      help = true,
+      lazy = true,
+      mason = true,
+      ["neo-tree"] = true,
+      oil = true,
+      qf = true,
+      TelescopePrompt = true,
+      toggleterm = true,
+    }
+
     require("auto-save").setup({
       enabled = true, -- start auto-save when the plugin is loaded
       execution_message = {
@@ -18,44 +34,17 @@ return {
       },
       condition = function(buf)
         local fn = vim.fn
-        local utils = require("auto-save.utils.data")
-
-        -- don't save for certain filetypes
-        local filetype_blacklist = {
-          "oil",
-          "alpha",
-          "neo-tree",
-          "TelescopePrompt",
-          "harpoon",
-          "toggleterm",
-          "lazy",
-          "mason",
-          "help",
-          "qf", -- quickfix
-          "gitcommit",
-          "gitrebase",
-        }
-
         local filetype = fn.getbufvar(buf, "&filetype")
         local bufname = fn.bufname(buf)
-        
-        -- check if filetype is not in blacklist
-        local filetype_ok = true
-        for _, ft in ipairs(filetype_blacklist) do
-          if filetype == ft then
-            filetype_ok = false
-            break
-          end
+
+        if ignored_filetypes[filetype] then
+          return false
         end
 
-        if filetype_ok then
-          -- only save normal files (not special buffers)
-          return fn.getbufvar(buf, "&modifiable") == 1 
-            and fn.getbufvar(buf, "&readonly") == 0
-            and fn.getbufvar(buf, "&buftype") == ""
-            and bufname ~= "" -- only save named buffers
-        end
-        return false
+        return fn.getbufvar(buf, "&modifiable") == 1
+          and fn.getbufvar(buf, "&readonly") == 0
+          and fn.getbufvar(buf, "&buftype") == ""
+          and bufname ~= ""
       end,
       write_all_buffers = false, -- only save current buffer
       debounce_delay = 1000, -- delay in ms before saving after text changes (1 second)

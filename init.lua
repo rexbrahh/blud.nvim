@@ -37,7 +37,7 @@ local function toggle_profile()
   if prof.is_recording() then
     prof.stop()
     vim.ui.input(
-      { prompt = "Save profile to:", completion = "file", default = "profile.json" },
+      { prompt = "Save profile to:", completion = "file", default = vim.fn.stdpath("state") .. "/profile.json" },
       function(filename)
         if filename then
           prof.export(filename)

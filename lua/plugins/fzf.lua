@@ -1,5 +1,44 @@
 return {
   "ibhagwan/fzf-lua",
+  cmd = "FzfLua",
+  keys = {
+    { "<leader>sa", function() require("fzf-lua").builtin() end, desc = "FZF" },
+    {
+      "<leader>sf",
+      function()
+        require("fzf-lua").files({
+          cmd = "rg --files --hidden --ignore --glob='!.git' --sortr=modified",
+          fzf_opts = { ["--scheme"] = "path", ["--tiebreak"] = "index" },
+        })
+      end,
+      desc = "Files",
+    },
+    { "<leader>sh", function() require("fzf-lua").help_tags() end, desc = "Help" },
+    { "<leader>sb", function() require("fzf-lua").buffers() end, desc = "Buffers" },
+    { "<leader>sr", function() require("fzf-lua").oldfiles({ include_current_session = true }) end, desc = "Recent files" },
+    { "<leader>sv", function() require("fzf-lua").grep_visual() end, desc = "Grep Visual" },
+    { "<leader>sc", function() require("fzf-lua").grep_cword() end, desc = "Current Word" },
+    { "<leader>sg", function() require("fzf-lua").live_grep_native() end, desc = "Grep Word" },
+    { "<leader>sd", function() require("fzf-lua").diagnostics_document() end, desc = "Diagnostics" },
+    { "gd", function() require("fzf-lua").lsp_definitions({ jump1 = true }) end, desc = "LSP Definitions" },
+    {
+      "<leader>lr",
+      function() require("fzf-lua").lsp_references({ includeDeclaration = false, ignore_current_line = true }) end,
+      desc = "LSP References",
+    },
+    { "<leader>lc", function() require("fzf-lua").lsp_code_actions() end, desc = "LSP Code Actions" },
+    { "<leader>lt", function() require("fzf-lua").lsp_typedefs() end, desc = "LSP Type Definitions" },
+    { "<leader>lI", function() require("fzf-lua").lsp_implementations() end, desc = "LSP Implementations" },
+    {
+      "<C-e>",
+      function()
+        require("fzf-lua.win").toggle_fullscreen()
+        require("fzf-lua.win").toggle_preview()
+      end,
+      desc = "Toggle FZF fullscreen",
+      mode = { "c", "i", "t" },
+    },
+  },
   config = function()
     local fzf = require("fzf-lua")
     fzf.register_ui_select()

@@ -4,7 +4,6 @@ return {
     -- Downloads a prebuilt binary or builds with rustup if needed.
     require("fff.download").download_or_build_binary()
   end,
-  lazy = false, -- plugin self-lazy-loads internally; keep available immediately for keymaps
   keys = {
     { "<leader>ff", function() require("fff").find_files() end, desc = "Find files (fff default)" },
     { "<leader>fF", function() require("fff").find_in_git_root() end, desc = "Find in git root (fff)" },

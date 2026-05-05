@@ -1,5 +1,5 @@
 # Multi-stage build for optimal image size
-FROM alpine:3.20 AS base
+FROM alpine:3.23 AS base
 
 # Install essential dependencies
 RUN apk add --no-cache \
@@ -38,7 +38,7 @@ USER nvim
 WORKDIR /home/nvim
 
 # Clone the configuration
-RUN git clone https://github.com/rexbrahh/.nvim.git /home/nvim/.config/nvim
+RUN git clone https://github.com/rexbrahh/blud.nvim.git /home/nvim/.config/nvim
 
 # Pre-install lazy.nvim
 RUN git clone --filter=blob:none https://github.com/folke/lazy.nvim.git \
@@ -54,10 +54,13 @@ ENV XDG_DATA_HOME=/home/nvim/.local/share
 ENV XDG_CACHE_HOME=/home/nvim/.cache
 
 # Pre-install plugins and LSPs by running nvim headlessly
-RUN nvim --headless "+Lazy! sync" +qa 2>/dev/null || true
+RUN nvim --headless "+Lazy! sync" +qa
 
 # Install LSPs via Mason
-RUN nvim --headless "+MasonInstallAll" +qa 2>/dev/null || true
+RUN nvim --headless \
+    "+LspInstall biome eslint html cssls tailwindcss jsonls lua_ls gopls basedpyright ruff bashls zls rust_analyzer clangd yamlls marksman dockerls docker_compose_language_service svelte astro graphql prismals taplo lemminx terraformls ansiblels cmake" \
+    "+DapInstall codelldb delve python js" \
+    +qa
 
 # Set shell to bash for better compatibility
 ENV SHELL=/bin/bash

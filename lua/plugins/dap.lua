@@ -7,46 +7,38 @@ return {
       { "<F10>", function() require("dap").step_over() end, desc = "DAP Step Over" },
       { "<F11>", function() require("dap").step_into() end, desc = "DAP Step Into" },
       { "<F12>", function() require("dap").step_out() end, desc = "DAP Step Out" },
-      { "<leader>du", function()
+      {
+        "<leader>du",
+        function()
           local dapui = require("dapui")
-          if dapui.is_open() then dapui.close() else dapui.open() end
-        end, desc = "DAP Toggle UI" },
+          if dapui.is_open() then
+            dapui.close()
+          else
+            dapui.open()
+          end
+        end,
+        desc = "DAP Toggle UI",
+      },
     },
-  },
-  {
-    "rcarriga/nvim-dap-ui",
-    dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
-    config = function()
-      require("dapui").setup({})
-      local dap = require("dap")
-      local dapui = require("dapui")
-      dap.listeners.after.event_initialized["dapui_config"] = function() dapui.open() end
-      dap.listeners.before.event_terminated["dapui_config"] = function() dapui.close() end
-      dap.listeners.before.event_exited["dapui_config"] = function() dapui.close() end
-    end,
-  },
-  {
-    "jay-babu/mason-nvim-dap.nvim",
-    dependencies = { "williamboman/mason.nvim", "mfussenegger/nvim-dap" },
-    opts = {
-      ensure_installed = { "codelldb", "delve", "python", "js" },
-      handlers = {},
-      automatic_installation = true,
+    dependencies = {
+      { "theHamsta/nvim-dap-virtual-text", opts = {} },
     },
-  },
-  {
-    "theHamsta/nvim-dap-virtual-text",
-    dependencies = { "mfussenegger/nvim-dap" },
-    opts = {},
-  },
-  -- Minimal language configurations (works with mason-nvim-dap adapters)
-  {
-    "mfussenegger/nvim-dap",
-    opts = {},
     config = function()
       local dap = require("dap")
 
-      -- Node/JS/TS via js-debug
+      dap.listeners.after.event_initialized["dapui_config"] = function()
+        local ok, dapui = pcall(require, "dapui")
+        if ok then dapui.open() end
+      end
+      dap.listeners.before.event_terminated["dapui_config"] = function()
+        local ok, dapui = pcall(require, "dapui")
+        if ok then dapui.close() end
+      end
+      dap.listeners.before.event_exited["dapui_config"] = function()
+        local ok, dapui = pcall(require, "dapui")
+        if ok then dapui.close() end
+      end
+
       dap.configurations.javascript = {
         {
           type = "pwa-node",
@@ -60,7 +52,6 @@ return {
       dap.configurations.javascriptreact = dap.configurations.javascript
       dap.configurations.typescriptreact = dap.configurations.javascript
 
-      -- Python
       dap.configurations.python = {
         {
           type = "python",
@@ -71,7 +62,6 @@ return {
         },
       }
 
-      -- Go (delve)
       dap.configurations.go = {
         {
           type = "go",
@@ -81,7 +71,6 @@ return {
         },
       }
 
-      -- C/C++/Rust/Zig via codelldb
       local codelldb_config = {
         type = "codelldb",
         request = "launch",
@@ -97,5 +86,21 @@ return {
       dap.configurations.rust = { codelldb_config }
       dap.configurations.zig = { codelldb_config }
     end,
+  },
+  {
+    "rcarriga/nvim-dap-ui",
+    lazy = true,
+    dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
+    opts = {},
+  },
+  {
+    "jay-babu/mason-nvim-dap.nvim",
+    cmd = { "DapInstall", "DapUninstall" },
+    dependencies = { "williamboman/mason.nvim", "mfussenegger/nvim-dap" },
+    opts = {
+      ensure_installed = { "codelldb", "delve", "python", "js" },
+      handlers = {},
+      automatic_installation = true,
+    },
   },
 }

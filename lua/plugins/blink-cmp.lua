@@ -1,18 +1,19 @@
 return {
   "saghen/blink.cmp",
-  lazy = false,
   enabled = true,
   event = { "CmdlineEnter", "InsertEnter" },
   dependencies = {
-    "L3MON4D3/LuaSnip",
-    dependencies = "rafamadriz/friendly-snippets",
-    version = "v2.*",
-    init = function()
-      require("luasnip.loaders.from_vscode").lazy_load()
-      require("luasnip.loaders.from_vscode").lazy_load({
-        paths = "~/.config/nvim/snippets",
-      })
-    end,
+    {
+      "L3MON4D3/LuaSnip",
+      version = "v2.*",
+      dependencies = "rafamadriz/friendly-snippets",
+      config = function()
+        require("luasnip.loaders.from_vscode").lazy_load()
+        require("luasnip.loaders.from_vscode").lazy_load({
+          paths = "~/.config/nvim/snippets",
+        })
+      end,
+    },
   },
   version = "*",
   config = function()

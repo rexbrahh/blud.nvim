@@ -1,9 +1,18 @@
 return {
   "nvim-neo-tree/neo-tree.nvim",
+  cmd = "Neotree",
+  keys = {
+    { "<leader>fe", "<cmd>Neotree toggle focus left reveal_force_cwd<cr>", desc = "File Explorer (left)" },
+  },
   dependencies = {
     "nvim-lua/plenary.nvim",
     "MunifTanjim/nui.nvim",
+    { "antosha417/nvim-lsp-file-operations", opts = {} },
   },
+  init = function()
+    vim.g.loaded_netrw = 1
+    vim.g.loaded_netrwPlugin = 1
+  end,
 
   config = function()
     local keymap = vim.keymap
@@ -13,9 +22,6 @@ return {
       "<cmd>Neotree toggle focus left reveal_force_cwd<cr>",
       { desc = "File Explorer (left)" }
     )
-
-    vim.g.loaded_netrw = 1
-    vim.g.loaded_netrwPlugin = 1
 
     require("neo-tree").setup({
       retain_hidden_root_indent = false,

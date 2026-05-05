@@ -1,4 +1,7 @@
 local function lint_progress()
+  if not package.loaded["lint"] then
+    return ""
+  end
   local linters = require("lint").get_running()
   if #linters == 0 then
     return ""
@@ -8,12 +11,7 @@ end
 
 -- Returns the current Git branch name, or nil if not in a repo.
 local function get_git_branch()
-  local handle = io.popen("git rev-parse --abbrev-ref HEAD 2>/dev/null")
-  if not handle then
-    return nil
-  end
-  local branch = handle:read("*a"):gsub("%s+$", "")
-  handle:close()
+  local branch = vim.b.gitsigns_head or vim.g.gitsigns_head
   return (branch ~= "" and branch ~= "HEAD") and branch or nil
 end
 

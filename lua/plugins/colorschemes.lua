@@ -12,10 +12,10 @@ return {
     end,
   },
 
-  -- Additional themes (loaded at startup to allow live preview switching)
-  { "folke/tokyonight.nvim", lazy = false, priority = 999 },
-  { "catppuccin/nvim", name = "catppuccin", lazy = false, priority = 999 },
-  { "rose-pine/neovim", name = "rose-pine", lazy = false, priority = 999 },
-  { "ellisonleao/gruvbox.nvim", lazy = false, priority = 999 },
-  { "rebelot/kanagawa.nvim", lazy = false, priority = 999 },
+  -- Additional themes are lazy-loaded by :colorscheme when previewing or switching.
+  { "folke/tokyonight.nvim", lazy = true },
+  { "catppuccin/nvim", name = "catppuccin", lazy = true },
+  { "rose-pine/neovim", name = "rose-pine", lazy = true },
+  { "ellisonleao/gruvbox.nvim", lazy = true },
+  { "rebelot/kanagawa.nvim", lazy = true },
 }

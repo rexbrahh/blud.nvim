@@ -1,6 +1,24 @@
 return {
   "yetone/avante.nvim",
-  event = "VeryLazy",
+  cmd = {
+    "AvanteAsk",
+    "AvanteChat",
+    "AvanteChatNew",
+    "AvanteEdit",
+    "AvanteRefresh",
+    "AvanteToggle",
+    "AvanteModels",
+    "AvanteHistory",
+    "AvanteStop",
+  },
+  keys = {
+    { "<leader>aa", "<cmd>AvanteAsk<CR>", mode = { "n", "v" }, desc = "Avante: Ask" },
+    { "<leader>aA", "<cmd>AvanteChatNew<CR>", mode = { "n", "v" }, desc = "Avante: Ask (new chat)" },
+    { "<leader>ac", "<cmd>AvanteChat<CR>", mode = { "n", "v" }, desc = "Avante: Chat" },
+    { "<leader>ae", "<cmd>AvanteEdit<CR>", mode = "v", desc = "Avante: Edit selection" },
+    { "<leader>ar", "<cmd>AvanteRefresh<CR>", desc = "Avante: Refresh" },
+    { "<leader>az", function() require("avante.api").zen_mode() end, desc = "Avante: Zen mode" },
+  },
   build = "make", -- downloads prebuilt libs if available, else builds
   dependencies = {
     "nvim-lua/plenary.nvim",

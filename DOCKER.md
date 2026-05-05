@@ -11,13 +11,13 @@ docker run -it --rm \
   -v "$HOME/.gitconfig":/home/nvim/.gitconfig:ro \
   -e TERM=xterm-256color \
   -e COLORTERM=truecolor \
-  ghcr.io/rexbrahh/bludvim:latest
+  ghcr.io/rexbrahh/blud.nvim:latest
 ```
 
 ### 2. **One-Liner Installation**
 ```bash
 # Install BludVim with Docker wrapper
-curl -fsSL https://raw.githubusercontent.com/rexbrahh/.nvim/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/rexbrahh/blud.nvim/main/install.sh | bash
 ```
 
 After installation, use:
@@ -32,8 +32,8 @@ bludvim .               # File explorer mode
 ### **Build Locally**
 ```bash
 # Clone and build
-git clone https://github.com/rexbrahh/.nvim
-cd .nvim
+git clone https://github.com/rexbrahh/blud.nvim
+cd blud.nvim
 docker build -t bludvim:latest .
 ```
 

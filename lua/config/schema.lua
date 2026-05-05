@@ -4,7 +4,7 @@ local M = {}
 vim.g.use_schemastore = true
 
 local function restart_lsp()
-  for _, client in pairs(vim.lsp.get_active_clients({ bufnr = 0 })) do
+  for _, client in pairs(vim.lsp.get_clients({ bufnr = 0 })) do
     if client.name == "jsonls" or client.name == "yamlls" then
       client.stop(true)
     end
@@ -27,4 +27,3 @@ end
 vim.api.nvim_create_user_command("SchemaToggle", M.toggle, { desc = "Toggle SchemaStore (JSON/YAML)" })
 
 return M
-
