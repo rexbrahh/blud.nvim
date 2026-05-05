@@ -6,6 +6,7 @@
 ```bash
 # Try BludVim instantly without installing anything
 docker run -it --rm \
+  --platform linux/amd64 \
   -v "$(pwd)":/workspace \
   -v "$HOME/.ssh":/home/nvim/.ssh:ro \
   -v "$HOME/.gitconfig":/home/nvim/.gitconfig:ro \
@@ -49,6 +50,7 @@ docker compose down     # Stop and cleanup
 ```bash
 # Full features with persistent storage
 docker run -it --rm \
+  --platform linux/amd64 \
   -v "$(pwd)":/workspace \
   -v bludvim_data:/home/nvim/.local/share/nvim \
   -v bludvim_cache:/home/nvim/.cache/nvim \
@@ -88,7 +90,7 @@ bludvim .               # Full IDE experience with LSPs
 - **20+ Language Servers** - Auto-installed via Mason
 - **Persistent Storage** - Configs and plugins preserved
 - **Git Integration** - SSH keys and config mounted
-- **Performance Optimized** - Alpine Linux base (1.2GB)
+- **Mason-Compatible Tooling** - Debian glibc base with Neovim 0.11.7
 - **Zero Setup** - Just run the container
 
 ## Comparison with AstroVim
@@ -98,7 +100,7 @@ bludvim .               # Full IDE experience with LSPs
 | One-liner try | ✅ | ✅ |
 | Persistent setup | ❌ | ✅ |
 | Custom LSPs | ✅ | ✅ |
-| Alpine base | ❌ | ✅ (smaller) |
+| glibc toolchain image | ✅ | ✅ |
 | Auto-install script | ❌ | ✅ |
 
 ## Troubleshooting

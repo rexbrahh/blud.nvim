@@ -2,6 +2,7 @@
 services:
   nvim:
     build: .
+    platform: linux/amd64
     container_name: bludvim
     stdin_open: true
     tty: true

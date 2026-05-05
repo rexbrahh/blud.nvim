@@ -105,6 +105,7 @@ run_with_compose() {
 # Function to run with plain docker
 run_with_docker() {
     docker run -it --rm \
+        --platform linux/amd64 \
         -v "$(pwd)":/workspace \
         -v nvim_data:/home/nvim/.local/share/nvim \
         -v nvim_cache:/home/nvim/.cache/nvim \

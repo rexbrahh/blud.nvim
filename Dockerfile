@@ -1,44 +1,61 @@
-# Multi-stage build for optimal image size
-FROM alpine:3.23 AS base
+# Mason does not provide linux/arm64 musl builds for every configured tool
+# here, and clangd is currently linux/x64 glibc-only in the Mason registry.
+ARG BASE_PLATFORM=linux/amd64
+FROM --platform=${BASE_PLATFORM} debian:trixie-slim AS base
+
+ARG NEOVIM_VERSION=0.11.7
+ENV DEBIAN_FRONTEND=noninteractive
 
 # Install essential dependencies
-RUN apk add --no-cache \
-    neovim \
-    git \
-    curl \
-    wget \
-    unzip \
-    tar \
-    gzip \
-    nodejs \
-    npm \
-    python3 \
-    py3-pip \
-    go \
-    rust \
-    cargo \
-    bash \
-    zsh \
-    fish \
-    tmux \
-    ripgrep \
-    fd \
-    fzf \
-    tree-sitter \
-    openssh-client \
-    ca-certificates \
-    tzdata \
-    && rm -rf /var/cache/apk/*
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        bash \
+        build-essential \
+        ca-certificates \
+        cargo \
+        curl \
+        fd-find \
+        fish \
+        fzf \
+        git \
+        golang \
+        gzip \
+        nodejs \
+        npm \
+        openssh-client \
+        python3 \
+        python3-pip \
+        python3-venv \
+        ripgrep \
+        rustc \
+        tar \
+        tmux \
+        tree-sitter-cli \
+        tzdata \
+        unzip \
+        wget \
+        xz-utils \
+        zsh \
+    && ln -sf /usr/bin/fdfind /usr/local/bin/fd \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install the same stable Neovim target used by the local config.
+RUN curl -fsSL "https://github.com/neovim/neovim/releases/download/v${NEOVIM_VERSION}/nvim-linux-x86_64.tar.gz" \
+        -o /tmp/nvim-linux-x86_64.tar.gz \
+    && tar -xzf /tmp/nvim-linux-x86_64.tar.gz -C /opt \
+    && ln -sf /opt/nvim-linux-x86_64/bin/nvim /usr/local/bin/nvim \
+    && rm /tmp/nvim-linux-x86_64.tar.gz \
+    && nvim --version | head -n 1
 
 # Create nvim user
-RUN adduser -D -s /bin/bash nvim
+RUN useradd --create-home --shell /bin/bash nvim
 
 # Switch to nvim user
 USER nvim
 WORKDIR /home/nvim
 
-# Clone the configuration
-RUN git clone https://github.com/rexbrahh/blud.nvim.git /home/nvim/.config/nvim
+# Copy the local configuration under test
+COPY --chown=nvim:nvim . /home/nvim/.config/nvim
 
 # Pre-install lazy.nvim
 RUN git clone --filter=blob:none https://github.com/folke/lazy.nvim.git \
@@ -56,11 +73,8 @@ ENV XDG_CACHE_HOME=/home/nvim/.cache
 # Pre-install plugins and LSPs by running nvim headlessly
 RUN nvim --headless "+Lazy! sync" +qa
 
-# Install LSPs via Mason
-RUN nvim --headless \
-    "+LspInstall biome eslint html cssls tailwindcss jsonls lua_ls gopls basedpyright ruff bashls zls rust_analyzer clangd yamlls marksman dockerls docker_compose_language_service svelte astro graphql prismals taplo lemminx terraformls ansiblels cmake" \
-    "+DapInstall codelldb delve python js" \
-    +qa
+# Install LSP/DAP packages via Mason and fail the image build on package errors.
+RUN nvim --headless "+luafile /home/nvim/.config/nvim/scripts/docker-install-mason.lua" +qa
 
 # Set shell to bash for better compatibility
 ENV SHELL=/bin/bash

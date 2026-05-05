@@ -34,12 +34,14 @@ curl -fsSL https://raw.githubusercontent.com/rexbrahh/blud.nvim/main/install.sh 
 ```bash
 # Test command - just prints version
 docker run --rm \
+  --platform linux/amd64 \
   -v "$(pwd)":/workspace \
   bludvim:latest nvim --version
 ```
 ```bash
 # interactive mode
 docker run -it --rm \
+  --platform linux/amd64 \
   -v "$(pwd)":/workspace \
   -v "$HOME/.ssh":/home/nvim/.ssh:ro \
   -v "$HOME/.gitconfig":/home/nvim/.gitconfig:ro \

@@ -2,23 +2,23 @@ return {
   "ibhagwan/fzf-lua",
   cmd = "FzfLua",
   keys = {
-    { "<leader>sa", function() require("fzf-lua").builtin() end, desc = "FZF" },
+    { "<leader>za", function() require("fzf-lua").builtin() end, desc = "FZF fallback" },
     {
-      "<leader>sf",
+      "<leader>zf",
       function()
         require("fzf-lua").files({
           cmd = "rg --files --hidden --ignore --glob='!.git' --sortr=modified",
           fzf_opts = { ["--scheme"] = "path", ["--tiebreak"] = "index" },
         })
       end,
-      desc = "Files",
+      desc = "Files (fzf fallback)",
     },
     { "<leader>sh", function() require("fzf-lua").help_tags() end, desc = "Help" },
     { "<leader>sb", function() require("fzf-lua").buffers() end, desc = "Buffers" },
     { "<leader>sr", function() require("fzf-lua").oldfiles({ include_current_session = true }) end, desc = "Recent files" },
-    { "<leader>sv", function() require("fzf-lua").grep_visual() end, desc = "Grep Visual" },
-    { "<leader>sc", function() require("fzf-lua").grep_cword() end, desc = "Current Word" },
-    { "<leader>sg", function() require("fzf-lua").live_grep_native() end, desc = "Grep Word" },
+    { "<leader>zv", function() require("fzf-lua").grep_visual() end, desc = "Grep visual (fzf fallback)" },
+    { "<leader>zc", function() require("fzf-lua").grep_cword() end, desc = "Current word (fzf fallback)" },
+    { "<leader>zg", function() require("fzf-lua").live_grep_native() end, desc = "Grep text (fzf fallback)" },
     { "<leader>sd", function() require("fzf-lua").diagnostics_document() end, desc = "Diagnostics" },
     { "gd", function() require("fzf-lua").lsp_definitions({ jump1 = true }) end, desc = "LSP Definitions" },
     {
@@ -136,25 +136,25 @@ return {
       return vim.tbl_extend("force", table1, table2)
     end
 
-    map("<leader>sa", function()
+    map("<leader>za", function()
       fzf.builtin(extend(builtin_opts, picker_opts))
-    end, "FZF")
+    end, "FZF fallback")
 
-    map("<leader>sf", function()
+    map("<leader>zf", function()
       fzf.files(extend(picker_opts, {
         cmd = "rg --files --hidden --ignore --glob='!.git' --sortr=modified",
         fzf_opts = { ["--scheme"] = "path", ["--tiebreak"] = "index" },
       }))
-    end, "Files")
+    end, "Files (fzf fallback)")
 
     map("<leader>sh", "help_tags", "Help")
     map("<leader>sb", "buffers", "Buffers")
     map("<leader>sr", function()
       fzf.oldfiles(extend(picker_opts, { include_current_session = true }))
     end, "Recent files")
-    map("<leader>sv", "grep_visual", "Grep Visual")
-    map("<leader>sc", "grep_cword", "Current Word")
-    map("<leader>sg", "live_grep_native", "Grep Word")
+    map("<leader>zv", "grep_visual", "Grep visual (fzf fallback)")
+    map("<leader>zc", "grep_cword", "Current word (fzf fallback)")
+    map("<leader>zg", "live_grep_native", "Grep text (fzf fallback)")
     map("<leader>sd", "diagnostics_document", "Diagnostics")
 
     --lsp
