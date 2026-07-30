@@ -1,7 +1,7 @@
 vim.loader.enable()
-vim.opt.mouse = ""
+vim.opt.mouse = "a"
 
--- no mode on the cmd line, only shown on lualine
+-- Show the mode in the statusline instead of the command line.
 vim.opt.showmode = false
 
 -- folds
@@ -30,12 +30,11 @@ vim.opt.incsearch = true
 -- term colors
 vim.opt.termguicolors = true
 
--- least amount of lines while scrolling is 10
-vim.opt.scrolloff = 999
+-- Keep nearby context without forcing the cursor into the screen center.
+vim.opt.scrolloff = 8
 vim.opt.signcolumn = "yes"
 
--- fast update
-vim.opt.updatetime = 50
+vim.opt.updatetime = 300
 
 -- better indentation
 vim.opt.tabstop = 2

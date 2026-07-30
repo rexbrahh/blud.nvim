@@ -25,8 +25,8 @@ map("n", "]q", "<cmd>cnext<CR>", "Next quickfix item")
 map("n", "[q", "<cmd>cprev<CR>", "Prev quickfix item")
 
 -- better up and down
-map({ "n", "v" }, "j", "gj", "Up")
-map({ "n", "v" }, "k", "gk", "Down")
+map({ "n", "v" }, "j", "gj", "Down")
+map({ "n", "v" }, "k", "gk", "Up")
 
 -- move with J and K ith indents
 map("v", "J", ":m '>+1<CR>gv=gv", "Move line down", { silent = true })
@@ -53,15 +53,15 @@ map("n", "<leader>yy", [["+yy]], "Yank line to clipboard")
 map("n", "<leader>Y", [["+yg_]], "Yank to end of line to clipboard")
 map({ "n", "v", "x" }, "<leader>p", '"+p', "Paste from clipboard")
 
--- indow management
+-- window management
 map("n", "<leader>wv", "<C-w>v", "Split window vertically")
-map("n", "<leader>wh", "<C-w>s", "Split window horizontally")
+map("n", "<leader>ws", "<C-w>s", "Split window horizontally")
 map("n", "<leader>we", "<C-w>=", "Make splits equal size")
 map("n", "<leader>wr", "<C-w>r", "Rotate splits")
-map("n", "<leader>wh", "<C-w>H", "Send split to the right")
-map("n", "<leader>wj", "<C-w>J", "Send split to the botton")
-map("n", "<leader>wk", "<C-w>K", "Send split to the top")
-map("n", "<leader>wl", "<C-w>L", "Send split to the left")
+map("n", "<leader>wH", "<C-w>H", "Send split to the left")
+map("n", "<leader>wJ", "<C-w>J", "Send split to the bottom")
+map("n", "<leader>wK", "<C-w>K", "Send split to the top")
+map("n", "<leader>wL", "<C-w>L", "Send split to the right")
 map("n", "<leader>wx", "<cmd>close<CR>", "Close current split")
 map("n", "<leader>wo", "<cmd>on | diffoff<CR>", "Close all other windows")
 
@@ -97,6 +97,3 @@ end, "Yank selection with filename as heading and wrap in markdown")
 map("n", "<leader>lS", function()
   require("config.schema").toggle()
 end, "Toggle SchemaStore for JSON/YAML")
-
--- Theme picker with live preview
-map("n", "<leader>tt", ":Telescope colorscheme enable_preview=true<CR>", "Switch theme (preview)")

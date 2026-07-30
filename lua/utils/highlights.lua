@@ -8,7 +8,9 @@ function Get_hl_hex(name, option)
   end
   local hl = vim.api.nvim_get_hl(0, { name = name })
   local color = hl[option]
-  if not color then return nil end
+  if not color then
+    return nil
+  end
   local hex_color = string.format("#%06x", color)
   return hex_color
 end
@@ -48,7 +50,9 @@ end
 local function set_hl(highlight, options)
   local cleaned = {}
   for k, v in pairs(options or {}) do
-    if v ~= nil then cleaned[k] = v end
+    if v ~= nil then
+      cleaned[k] = v
+    end
   end
   vim.api.nvim_set_hl(0, highlight, cleaned)
 end
@@ -77,23 +81,6 @@ vim.api.nvim_create_autocmd({ "ColorScheme", "VimEnter" }, {
     set_hl("DiagnosticUnnecessary", { underline = true })
     set_hl("WinSeparator", { link = "FloatBorder" })
 
-    set_hl("NeoTreeNormal", { link = "NormalFloat" })
-    -- Make Neo-tree follow theme more closely (Atom One Dark)
-    set_hl("NeoTreeDirectoryIcon", { fg = Get_hl_hex("Directory", "fg") })
-    set_hl("NeoTreeDirectoryName", { fg = Get_hl_hex("Directory", "fg") })
-    set_hl("NeoTreeFileIcon", { fg = Get_hl_hex("Normal", "fg") })
-    set_hl("NeoTreeFileName", { fg = Get_hl_hex("Normal", "fg") })
-    set_hl("NeoTreeFileNameOpened", { fg = Get_hl_hex("Special", "fg"), bold = true })
-    -- Git colors track theme accents
-    set_hl("NeoTreeGitUnstaged", { link = "Changed" })
-    set_hl("NeoTreeGitModified", { link = "Changed" })
-    set_hl("NeoTreeGitUntracked", { link = "Added" })
-    set_hl("NeoTreeGitRenamed", { link = "Added" })
-    set_hl("NeoTreeGitStaged", { link = "Added" })
-    set_hl("NeoTreeGitAdded", { link = "Added" })
-    set_hl("NeoTreeGitDeleted", { link = "Removed" })
-    set_hl("NeoTreeGitConflict", { link = "Removed" })
-    
     -- Subtle cursor line to blend with transparency
     set_hl("CursorLine", { bg = "NONE" })
     set_hl("CursorLineNr", { bg = "NONE", bold = true })
@@ -116,40 +103,16 @@ vim.api.nvim_create_autocmd({ "ColorScheme", "VimEnter" }, {
     set_hl("PmenuSel", { bg = "NONE" })
     set_hl("EndOfBuffer", { bg = "NONE" })
     set_hl("NonText", { bg = "NONE" })
-    
-    -- Plugin specific transparency
-    set_hl("NeoTreeNormal", { bg = "NONE" })
-    set_hl("NeoTreeNormalNC", { bg = "NONE" })
-    set_hl("NeoTreeEndOfBuffer", { bg = "NONE" })
-    set_hl("TelescopeNormal", { bg = "NONE" })
-    set_hl("TelescopeBorder", { bg = "NONE" })
-    set_hl("TelescopeSelection", { bg = "NONE" })
-    -- Theme-independent header color (pleasant blue)
-    set_hl("AlphaHeader", { fg = "#89B4FA", bg = "NONE" })
-    set_hl("AlphaButtons", { bg = "NONE" })
-    set_hl("AlphaFooter", { bg = "NONE" })
-    
-    -- Neo-tree themed colors
-    set_hl("NeoTreeFileName", { fg = Get_hl_hex("Normal", "fg") })
-    set_hl("NeoTreeFileIcon", { fg = Get_hl_hex("Normal", "fg") })
-    set_hl("NeoTreeRootName", { fg = Get_hl_hex("Directory", "fg"), bold = true })
-    set_hl("NeoTreeSymbolicLinkTarget", { fg = Get_hl_hex("String", "fg") })
 
-    -- Lualine transparency
-    set_hl("lualine_a_normal", { bg = "NONE" })
-    set_hl("lualine_b_normal", { bg = "NONE" })
-    set_hl("lualine_c_normal", { bg = "NONE" })
-    
     -- Harmonize Mini Icons to theme (avoid neon)
     local dir_fg = Get_hl_hex("Directory", "fg") or Get_hl_hex("Special", "fg")
-    local norm_fg = Get_hl_hex("Normal", "fg")
     local str_fg = Get_hl_hex("String", "fg")
     set_hl("MiniIconsBlue", { fg = dir_fg })
     set_hl("MiniIconsGreen", { fg = str_fg })
     set_hl("MiniIconsYellow", { fg = Get_hl_hex("Identifier", "fg") })
     set_hl("MiniIconsPurple", { fg = Get_hl_hex("Special", "fg") })
     set_hl("MiniIconsRed", { fg = Get_hl_hex("Error", "fg") })
-    
+
     -- Keep important highlights visible
     -- Cursor stays visible (don't touch Cursor, lCursor, etc.)
     -- Visual selection stays visible (don't touch Visual)

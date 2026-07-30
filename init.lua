@@ -1,9 +1,9 @@
 require("config.settings")
 require("config.keymaps")
+require("config.autosave")
 require("config.lazy")
 
 require("utils.highlights")
-require("utils.tailwind")
 
 if vim.g.neovide then
   vim.o.guifont = "Input Mono,Symbols Nerd Font Mono:h12"
@@ -23,21 +23,31 @@ if should_profile then
       prof.instrument("*")
     end
   else
-    vim.notify("Profile plugin not installed. Install stevearc/profile.nvim to enable profiling.", vim.log.levels.WARN)
+    vim.notify(
+      "Profile plugin not installed. Install stevearc/profile.nvim to enable profiling.",
+      vim.log.levels.WARN
+    )
   end
 end
 
 local function toggle_profile()
   local ok, prof = pcall(require, "profile")
   if not ok then
-    vim.notify("Profile plugin not installed. Install stevearc/profile.nvim to enable profiling.", vim.log.levels.WARN)
+    vim.notify(
+      "Profile plugin not installed. Install stevearc/profile.nvim to enable profiling.",
+      vim.log.levels.WARN
+    )
     return
   end
 
   if prof.is_recording() then
     prof.stop()
     vim.ui.input(
-      { prompt = "Save profile to:", completion = "file", default = vim.fn.stdpath("state") .. "/profile.json" },
+      {
+        prompt = "Save profile to:",
+        completion = "file",
+        default = vim.fn.stdpath("state") .. "/profile.json",
+      },
       function(filename)
         if filename then
           prof.export(filename)
@@ -49,6 +59,5 @@ local function toggle_profile()
     prof.start("blink*")
   end
 end
-vim.opt.mouse = "a"
 
 vim.keymap.set("", "<f1>", toggle_profile)
