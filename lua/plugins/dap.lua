@@ -1,12 +1,53 @@
+local function executable_or_warn(name)
+  if vim.fn.executable(name) == 1 then
+    return true
+  end
+  vim.notify_once(
+    string.format("Debugger adapter '%s' is missing. Activate the Nix systems-tool profile.", name),
+    vim.log.levels.ERROR
+  )
+  return false
+end
+
 return {
   {
     "mfussenegger/nvim-dap",
     keys = {
-      { "<F5>", function() require("dap").continue() end, desc = "DAP Continue" },
-      { "<F9>", function() require("dap").toggle_breakpoint() end, desc = "DAP Toggle Breakpoint" },
-      { "<F10>", function() require("dap").step_over() end, desc = "DAP Step Over" },
-      { "<F11>", function() require("dap").step_into() end, desc = "DAP Step Into" },
-      { "<F12>", function() require("dap").step_out() end, desc = "DAP Step Out" },
+      {
+        "<F5>",
+        function()
+          require("dap").continue()
+        end,
+        desc = "DAP continue",
+      },
+      {
+        "<F9>",
+        function()
+          require("dap").toggle_breakpoint()
+        end,
+        desc = "DAP toggle breakpoint",
+      },
+      {
+        "<F10>",
+        function()
+          require("dap").step_over()
+        end,
+        desc = "DAP step over",
+      },
+      {
+        "<F11>",
+        function()
+          require("dap").step_into()
+        end,
+        desc = "DAP step into",
+      },
+      {
+        "<F12>",
+        function()
+          require("dap").step_out()
+        end,
+        desc = "DAP step out",
+      },
       {
         "<leader>du",
         function()
@@ -17,74 +58,77 @@ return {
             dapui.open()
           end
         end,
-        desc = "DAP Toggle UI",
+        desc = "DAP toggle UI",
       },
     },
-    dependencies = {
-      { "theHamsta/nvim-dap-virtual-text", opts = {} },
-    },
+    dependencies = { { "theHamsta/nvim-dap-virtual-text", opts = {} } },
     config = function()
       local dap = require("dap")
 
       dap.listeners.after.event_initialized["dapui_config"] = function()
         local ok, dapui = pcall(require, "dapui")
-        if ok then dapui.open() end
+        if ok then
+          dapui.open()
+        end
       end
       dap.listeners.before.event_terminated["dapui_config"] = function()
         local ok, dapui = pcall(require, "dapui")
-        if ok then dapui.close() end
+        if ok then
+          dapui.close()
+        end
       end
       dap.listeners.before.event_exited["dapui_config"] = function()
         local ok, dapui = pcall(require, "dapui")
-        if ok then dapui.close() end
+        if ok then
+          dapui.close()
+        end
       end
 
-      dap.configurations.javascript = {
-        {
-          type = "pwa-node",
-          request = "launch",
-          name = "Launch file",
-          program = "${file}",
-          cwd = "${workspaceFolder}",
-        },
-      }
-      dap.configurations.typescript = dap.configurations.javascript
-      dap.configurations.javascriptreact = dap.configurations.javascript
-      dap.configurations.typescriptreact = dap.configurations.javascript
-
-      dap.configurations.python = {
-        {
-          type = "python",
-          request = "launch",
-          name = "Launch current file",
-          program = "${file}",
-          console = "integratedTerminal",
-        },
-      }
+      dap.adapters.codelldb = function(callback)
+        if not executable_or_warn("codelldb") then
+          return
+        end
+        callback({
+          type = "server",
+          port = "${port}",
+          executable = {
+            command = "codelldb",
+            args = { "--port", "${port}" },
+          },
+        })
+      end
+      dap.adapters.go = function(callback)
+        if not executable_or_warn("dlv") then
+          return
+        end
+        callback({
+          type = "server",
+          port = "${port}",
+          executable = {
+            command = "dlv",
+            args = { "dap", "-l", "127.0.0.1:${port}" },
+          },
+        })
+      end
 
       dap.configurations.go = {
-        {
-          type = "go",
-          name = "Debug",
-          request = "launch",
-          program = "${file}",
-        },
+        { type = "go", name = "Debug file", request = "launch", program = "${file}" },
       }
 
-      local codelldb_config = {
+      local codelldb = {
         type = "codelldb",
         request = "launch",
-        name = "Launch",
+        name = "Launch executable",
         program = function()
-          return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+          return vim.fn.input("Executable: ", vim.fn.getcwd() .. "/", "file")
         end,
         cwd = "${workspaceFolder}",
         stopOnEntry = false,
       }
-      dap.configurations.c = { codelldb_config }
-      dap.configurations.cpp = { codelldb_config }
-      dap.configurations.rust = { codelldb_config }
-      dap.configurations.zig = { codelldb_config }
+      dap.configurations.c = { codelldb }
+      dap.configurations.cpp = { codelldb }
+      dap.configurations.rust = { codelldb }
+      dap.configurations.zig = { codelldb }
     end,
   },
   {
@@ -92,15 +136,5 @@ return {
     lazy = true,
     dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
     opts = {},
-  },
-  {
-    "jay-babu/mason-nvim-dap.nvim",
-    cmd = { "DapInstall", "DapUninstall" },
-    dependencies = { "williamboman/mason.nvim", "mfussenegger/nvim-dap" },
-    opts = {
-      ensure_installed = { "codelldb", "delve", "python", "js" },
-      handlers = {},
-      automatic_installation = true,
-    },
   },
 }

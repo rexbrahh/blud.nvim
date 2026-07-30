@@ -1,7 +1,7 @@
 return {
   "j-hui/fidget.nvim",
   enabled = true,
-  event = "VeryLazy",
+  event = "LspAttach",
   config = function()
     vim.keymap.set("n", "<leader>nh", "<cmd>Fidget history<CR>", { desc = "Notification history" })
     vim.keymap.set("n", "<leader>ns", "<cmd>Fidget suppress<CR>", { desc = "Notification supress" })

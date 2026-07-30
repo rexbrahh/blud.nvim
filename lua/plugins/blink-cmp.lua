@@ -2,32 +2,17 @@ return {
   "saghen/blink.cmp",
   enabled = true,
   event = { "CmdlineEnter", "InsertEnter" },
-  dependencies = {
-    {
-      "L3MON4D3/LuaSnip",
-      version = "v2.*",
-      dependencies = "rafamadriz/friendly-snippets",
-      config = function()
-        require("luasnip.loaders.from_vscode").lazy_load()
-        require("luasnip.loaders.from_vscode").lazy_load({
-          paths = "~/.config/nvim/snippets",
-        })
-      end,
-    },
-  },
-  version = "*",
+  dependencies = { "rafamadriz/friendly-snippets" },
+  version = "1.*",
   config = function()
     local cmp = require("blink.cmp")
 
     cmp.setup({
       enabled = function()
-        local filetype = vim.bo[0].filetype == "fzf"
-        return filetype and false or true
+        return vim.b.completion ~= false
+          and vim.bo.filetype ~= "fzf"
+          and vim.bo.filetype ~= "bigfile"
       end,
-
-      snippets = {
-        preset = "luasnip",
-      },
 
       sources = {
         default = { "lsp", "snippets", "path", "buffer" },
@@ -45,7 +30,7 @@ return {
             name = "LSP",
           },
           snippets = {
-            name = "LSP",
+            name = "SNIP",
           },
         },
       },

@@ -1,9 +1,9 @@
-# Mason does not provide linux/arm64 musl builds for every configured tool
-# here, and clangd is currently linux/x64 glibc-only in the Mason registry.
+# Keep this as an editor smoke-test image. Project toolchains and language
+# servers must come from the host Nix profile or a project development shell.
 ARG BASE_PLATFORM=linux/amd64
 FROM --platform=${BASE_PLATFORM} debian:trixie-slim AS base
 
-ARG NEOVIM_VERSION=0.11.7
+ARG NEOVIM_VERSION=0.12.4
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Install essential dependencies
@@ -62,7 +62,7 @@ RUN git clone --filter=blob:none https://github.com/folke/lazy.nvim.git \
     --branch=stable /home/nvim/.local/share/nvim/lazy/lazy.nvim
 
 # Create necessary directories
-RUN mkdir -p /home/nvim/.local/share/nvim/{mason,lazy} \
+RUN mkdir -p /home/nvim/.local/share/nvim/lazy \
     && mkdir -p /home/nvim/.cache/nvim
 
 # Set environment variables
@@ -70,11 +70,8 @@ ENV XDG_CONFIG_HOME=/home/nvim/.config
 ENV XDG_DATA_HOME=/home/nvim/.local/share
 ENV XDG_CACHE_HOME=/home/nvim/.cache
 
-# Pre-install plugins and LSPs by running nvim headlessly
+# Pre-install plugins and verify the editor starts headlessly.
 RUN nvim --headless "+Lazy! sync" +qa
-
-# Install LSP/DAP packages via Mason and fail the image build on package errors.
-RUN nvim --headless "+luafile /home/nvim/.config/nvim/scripts/docker-install-mason.lua" +qa
 
 # Set shell to bash for better compatibility
 ENV SHELL=/bin/bash
