@@ -67,23 +67,17 @@ mv ~/.local/share/nvim.backup ~/.local/share/nvim
 
 ##  Requirements
 
-- **Neovim 0.11+** (required for native `vim.lsp.config` support)
+- **Neovim 0.12.4+**
 - **Nerd Font** - For icons (MesloLGLDZ Nerd Font recommended)
 - **Git** - For plugin management
-- **Node.js** - For LSP servers
-- **Python 3** - For Python LSPs
-- **Rust** - For rust-analyzer (optional)
-- **Go** - For gopls (optional)
+- **Nix profile or project development shell** - Owns language servers,
+  formatters, linters, task tools, and debugger adapters
   
 ##  Customization
 
-### **Transparency**
-The full transparency is configured in:
-- `lua/plugins/transparency.lua` - Main transparency plugin
-- `lua/utils/highlights.lua` - Manual transparency overrides
-
 ### **LSP Configuration**
-Add new language servers in `lua/plugins/lsp-config.lua` and `lua/plugins/mason.lua`
+Add language-server behavior in `lua/plugins/lsp-config.lua`; add executables to
+the central package catalog in `~/.config/nix/data/packages/default.nix`.
 
 ### **Key Bindings**
 Modify mappings in `lua/config/keymaps.lua` and individual plugin configs

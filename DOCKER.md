@@ -79,19 +79,21 @@ bludvim                 # Current directory
 bludvim main.py         # Specific file
 bludvim src/            # Directory exploration
 
-# Project development
+# Project development (mount or enter a tool-providing development shell)
 cd my-project
-bludvim .               # Full IDE experience with LSPs
+bludvim .
 ```
 
 ## Features
 
-- **40+ Pre-installed Plugins** - Ready to use
-- **20+ Language Servers** - Auto-installed via Mason
+- **Focused Plugin Set** - Installed from the pinned lockfile
+- **External Tool Ownership** - Language servers and debuggers come from Nix
+  or the project development shell
 - **Persistent Storage** - Configs and plugins preserved
 - **Git Integration** - SSH keys and config mounted
-- **Mason-Compatible Tooling** - Debian glibc base with Neovim 0.11.7
-- **Zero Setup** - Just run the container
+- **Neovim 0.12.4** - Matches the supported editor version
+- **Smoke-Test Image** - Exercises the editor configuration without a second
+  package manager
 
 ## Comparison with AstroVim
 
@@ -99,9 +101,9 @@ bludvim .               # Full IDE experience with LSPs
 |---------|----------------|---------|
 | One-liner try | ✅ | ✅ |
 | Persistent setup | ❌ | ✅ |
-| Custom LSPs | ✅ | ✅ |
+| Custom LSPs | ✅ | Via mounted project toolchain |
 | glibc toolchain image | ✅ | ✅ |
-| Auto-install script | ❌ | ✅ |
+| Editor plugin install | ❌ | ✅ |
 
 ## Troubleshooting
 
