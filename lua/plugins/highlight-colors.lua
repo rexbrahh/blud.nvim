@@ -1,7 +1,17 @@
 return {
   "brenoprata10/nvim-highlight-colors",
-  event = { "BufReadPre", "BufNewFile" },
-  init = function()
+  ft = {
+    "css",
+    "html",
+    "javascript",
+    "javascriptreact",
+    "json",
+    "lua",
+    "svelte",
+    "typescript",
+    "typescriptreact",
+  },
+  config = function()
     require("nvim-highlight-colors").setup({
       render = "virtual",
       virtual_symbol = " ",

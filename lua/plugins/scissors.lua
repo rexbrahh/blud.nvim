@@ -1,9 +1,9 @@
 return {
   "chrisgrieser/nvim-scissors",
-  event = { "BufNewFile", "BufReadPre" },
-  dependencies = "ibhagwan/fzf-lua",
+  cmd = { "ScissorsAddNewSnippet", "ScissorsEditSnippet" },
   opts = {
     snippetDir = "$HOME/.config/nvim/snippets/",
+    snippetSelection = { picker = "vim.ui.select" },
     editSnippetPopup = {
       height = 0.4,
       width = 0.5,

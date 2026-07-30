@@ -1,6 +1,13 @@
 return {
   "windwp/nvim-ts-autotag",
-  event = { "InsertEnter" },
+  ft = {
+    "astro",
+    "html",
+    "javascriptreact",
+    "jinja",
+    "svelte",
+    "typescriptreact",
+  },
   config = function()
     require("nvim-ts-autotag").setup({
       aliases = {

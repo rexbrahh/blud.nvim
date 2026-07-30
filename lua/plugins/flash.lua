@@ -1,6 +1,5 @@
 return {
   "folke/flash.nvim",
-  event = { "BufReadPre", "BufNewFile" },
   opts = {
     highlight = {
       backdrop = true,

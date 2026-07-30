@@ -1,10 +1,9 @@
 return {
   "folke/todo-comments.nvim",
-  event = "VeryLazy",
+  cmd = { "TodoFzfLua", "TodoQuickFix", "TodoLocList" },
   dependencies = { "nvim-lua/plenary.nvim" },
   opts = {},
   keys = {
-    { "<leader>st", ":TodoTelescope<CR>", desc = "Todos (Telescope)" },
+    { "<leader>st", ":TodoFzfLua<CR>", desc = "Todos" },
   },
 }
-
